@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+<script>
+    words = [
+    ["wolf","web","water","watch",],
+    ["fox","box","six","wax",],
+    ["yoyo", "yak", "yogurt", "yacht",],
+    ["zipper", "zero", "zoo", "zebra"]
+    ];
+function add_word() {
+    var element = document.getElementById("words");
+    for (var i = 0; i < words.length; i++) {
+        var div = document.createElement('div');
+        div.classList.add("row");
+        element.appendChild(div);
+        for (var k=0; k < words[i].length; k++) {
+            var div2 = document.createElement('div');
+            div2.classList.add("column");
+            var img = document.createElement('img');
+            img.src = "img/" + words[i][k] + "/1.jpg";
+            img.height = 100;
+            img.addEventListener("click", function() {
+                speak(this.parentNode.childNodes[1].innerHTML);
+            });
+            div2.appendChild(img);
+            txt = document.createElement('p');
+            txt.innerHTML = words[i][k];
+            div2.appendChild(txt);
+            div.appendChild(div2);
+        }
+        element.appendChild(document.createElement('br'));
+        element.appendChild(document.createElement('br'));
+    }
+}
+function speak(word) {
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = word;
+    window.speechSynthesis.speak(msg);
+    console.log('Speaking: ' + word);
+}
+</script>
+    </head>
+    <body>
+        <div id="words"></div>
+    </body>
+<script>
+    add_word();
+if ('speechSynthesis' in window) {
+ // Speech Synthesis supported 🎉
+}else{
+  // Speech Synthesis Not Supported 😣
+  alert("Sorry, your browser doesn't support text to speech!");
+}
+var msg = new SpeechSynthesisUtterance();
+msg.text = "Good Morning";
+window.speechSynthesis.speak(msg);
+</script>
+</html>
